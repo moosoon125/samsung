@@ -37,10 +37,10 @@ spec:
   volumes:
   - name: cacrt
     secret:
-      secretName: registry-cert      
+      secretName: harbor-cred      
   - name: dockerconfigjson
     secret:
-      secretName: registry-cert         
+      secretName: harbor-cred         
   imagePullSecrets:
   - name: harbor-cred
 '''
