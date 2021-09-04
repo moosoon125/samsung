@@ -22,13 +22,25 @@ spec:
     - sleep
     args:
     - 99d
-    image: harbor.clouddari.com/library/kaniko-project/executor:debug   
+    image: harbor.clouddari.com/library/kaniko-project/executor:debug
+    volumeMounts:
+    - name: cacrt
+      mountPath: /kaniko/ssl/certs/
+    - name: dockerconfigjson
+      mountPath: /kaniko/.docker/   
   - name: helm
     command:
     - sleep
     args:
     - 99d
-    image: harbor.clouddari.com/library/alpine/helm:latest  
+    image: harbor.clouddari.com/library/alpine/helm:latest
+  volumes:
+  - name: cacrt
+    secret:
+      secretName: registry-cert      
+  - name: dockerconfigjson
+    secret:
+      secretName: registry-cert         
   imagePullSecrets:
   - name: harbor-cred
 '''
