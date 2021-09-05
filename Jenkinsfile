@@ -40,7 +40,7 @@ spec:
       secretName: registry-cert
       items:
       - key: additional-ca-cert-bundle.crt
-        path: "additional-ca-cert-bundle.crt"
+        path: "harbor-cred"
   - name: dockerconfigjson
     secret:
       secretName: registry-cert
