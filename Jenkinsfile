@@ -43,7 +43,7 @@ spec:
         path: harbor-server.crt  
   - name: dockerconfigjson
     secret:
-      secretName: registry-cert
+      secretName: harbor-cred
       items:
       - key: dockerconfigjson
         path: "config.json"
