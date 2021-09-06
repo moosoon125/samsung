@@ -2,4 +2,4 @@
 # 1
 # Locla fetch pull TEST
 # webhook test 2021-09-06 AM11:11"
-# kiniko image re push 2021-09-06 PM 4:22
+# kaniko image re push 2021-09-06 PM 4:22
