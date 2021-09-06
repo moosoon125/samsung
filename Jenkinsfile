@@ -35,7 +35,7 @@ spec:
   volumes:    
   - name: dockerconfigjson
     secret:
-      secretName: harbor-cred      
+      secretName: registry-cert      
   imagePullSecrets:
   - name: harbor-cred
 '''
