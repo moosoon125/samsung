@@ -44,7 +44,7 @@ spec:
         path: harbor-server.crt
   - name: dockerconfigjson
     secret:
-      secretName: harbor-cred      
+      secretName: harbor-cred
   imagePullSecrets:
   - name: harbor-cred
 '''
