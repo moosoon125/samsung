@@ -41,13 +41,13 @@ spec:
       secretName: registry-cert
       items:
       - key: harbor-server.crt
-        path: harbor-server.crt
+        path: "harbor-server.crt"
   - name: dockerconfigjson
     secret:
       secretName: harbor-cred
       items:
-      - key: harbor-server.crt
-        path: harbor-server.crt
+      - key: dockerconfigjson
+        path: "config.json"
   imagePullSecrets:
   - name: harbor-cred
 '''
