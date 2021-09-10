@@ -3,7 +3,7 @@ pipeline {
         HARBOR_URL = "harbor.clouddari.com"
         CI_PROJECT_PATH = "samsung"
         BRANCH = "develop"
-        APP_NAME = "samsung"        
+        APP_NAME = "samsung"
     }
     agent {
         kubernetes {
