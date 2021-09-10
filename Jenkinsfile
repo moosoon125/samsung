@@ -37,7 +37,7 @@ spec:
     secret:
       secretName: harbor-cred
       items:
-      - key: dockerconfigjson
+      - key: ".dockerconfigjson"
         path: "config.json"
   imagePullSecrets:
   - name: harbor-cred
