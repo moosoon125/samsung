@@ -24,8 +24,6 @@ spec:
     - 99d
     image: harbor.clouddari.com/library/kaniko-project/executor:debug
     volumeMounts:
-    - name: cacrt
-      mountPath: /kaniko/ssl/certs/
     - name: dockerconfigjson
       mountPath: /kaniko/.docker/
   - name: helm
@@ -34,13 +32,7 @@ spec:
     args:
     - 99d
     image: harbor.clouddari.com/library/alpine/helm:latest
-  volumes:
-  - name: cacrt
-    secret:
-      secretName: registry-cert
-      items:
-      - key: harbor-server.crt
-        path: "harbor-server.crt"
+  volumes:  
   - name: dockerconfigjson
     secret:
       secretName: harbor-cred
