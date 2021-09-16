@@ -64,7 +64,7 @@ if (path.includes('favicon')){
    }
 
 } else {
-   resp.end("No defined Path.." + "\n");
+   resp.end("No defined Path..CD 배포 후 서비스 정상" + "\n");
 }
 }
 var w = http.createServer(content);
