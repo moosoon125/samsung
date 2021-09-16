@@ -64,7 +64,7 @@ if (path.includes('favicon')){
    }
 
 } else {
-   resp.end("No defined Path." + "\n");
+   resp.end("No defined Path.." + "\n");
 }
 }
 var w = http.createServer(content);
