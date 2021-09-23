@@ -7,7 +7,7 @@ LABEL MAINTAINER "DevOps Group"
 # WORKDIR /app
 
 # 빌드된 jar 파일 복사
-COPY build/libs/*-SNAPSHOT.jar app.jar
+COPY build/libs/*SNAPSHOT.jar app.jar
 
 # 노출 시킬 포트번호
 EXPOSE 8080
