@@ -1,7 +1,8 @@
 pipeline {
     environment {
-        HARBOR_URL = "harbor.clouddari.com"
+        HARBOR_URL = "harbor.cloudbrg.com"
         CI_PROJECT_PATH = "samsung"
+        BRANCH = "release"
         APP_NAME = "samsung"
     }
     agent {
@@ -16,14 +17,14 @@ spec:
     - sleep
     args:
     - 99d
-    image: harbor.clouddari.com/library/gradle:7.1.1
+    image: harbor.cloudbrg.com/library/gradle:7.1.1
   - name: kaniko
     command:
     - sleep
     args:
     - 99d
-    image: harbor.clouddari.com/library/kaniko-project/executor:debug
-    volumeMounts:    
+    image: harbor.cloudbrg.com/library/kaniko-project/executor:debug
+    volumeMounts:
     - name: dockerconfigjson
       mountPath: /kaniko/.docker/
   - name: helm
@@ -31,11 +32,14 @@ spec:
     - sleep
     args:
     - 99d
-    image: harbor.clouddari.com/library/alpine/helm:latest
-  volumes:    
+    image: harbor.cloudbrg.com/library/alpine/helm:latest
+  volumes:  
   - name: dockerconfigjson
     secret:
-      secretName: harbor-cred      
+      secretName: harbor-cred
+      items:
+      - key: ".dockerconfigjson"
+        path: "config.json"
   imagePullSecrets:
   - name: harbor-cred
 '''
@@ -45,23 +49,26 @@ spec:
         stage('source build') {
             steps {
                 container('gradle') {
-                    sh 'echo "source build"'
+                    sh 'chmod +x gradlew'
+                    sh './gradlew build'
                 }
             }
         }
         stage('image build') {
             steps {
                 container('kaniko') {
-                    sh '/kaniko/executor --context ./ --dockerfile ./dockerfile --destination $HARBOR_URL/$CI_PROJECT_PATH/$APP_NAME:$BUILD_TAG'
+                    sh 'ls -al && pwd'
+                    sh 'ls -al build/libs/'
+                    sh '/kaniko/executor --context ./ --dockerfile ./dockerfile --destination $HARBOR_URL/$CI_PROJECT_PATH/$BRANCH/$APP_NAME:$BUILD_TAG'
                 }
             }
         }
         stage('deploy') {
             steps {
                 container('helm') {
-                    sh 'helm upgrade --install --set image.tag=${BUILD_TAG} -n $APP_NAME --create-namespace $APP_NAME ./helm-deploy/helm'
+                    sh 'helm upgrade --install --set image.tag=${BUILD_TAG} -n $BRANCH --create-namespace $APP_NAME ./helm-deploy/helm'
                 }
             }
         }
     }
-}
+} 
