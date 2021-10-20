@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        HARBOR_URL = "harbor.clouddari.com"
+        HARBOR_URL = "cr-dev.aip.samsungds.net"
         CI_PROJECT_PATH = "samsung"
         BRANCH = "release"
         APP_NAME = "samsung"
@@ -17,13 +17,13 @@ spec:
     - sleep
     args:
     - 99d
-    image: harbor.clouddari.com/library/gradle:7.1.1
+    image: cr-dev.aip.samsungds.net/library/gradle:7.2.0
   - name: kaniko
     command:
     - sleep
     args:
     - 99d
-    image: harbor.clouddari.com/library/kaniko-project/executor:debug
+    image: cr-dev.aip.samsungds.net/library/kaniko-project/executor:debug
     volumeMounts:
     - name: dockerconfigjson
       mountPath: /kaniko/.docker/
@@ -32,7 +32,7 @@ spec:
     - sleep
     args:
     - 99d
-    image: harbor.clouddari.com/library/alpine/helm:latest
+    image: cr-dev.aip.samsungds.net/library/alpine/helm:latest
   volumes:  
   - name: dockerconfigjson
     secret:
